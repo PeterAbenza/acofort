@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serralheria Aço Fort</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    /* Reset e fonte base */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar com fundo transparente que vira sólido ao scroll */
+    nav.navbar {
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+      background-color: transparent;
+    }
+    nav.navbar.scrolled {
+      background-color: #1a1a1a !important;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+    }
+    nav.navbar .navbar-brand {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 1.5px;
+      color: #4da6ff;
+      transition: color 0.3s ease;
+    }
+    nav.navbar .navbar-brand:hover {
+      color: #66c7ff;
+    }
+    nav.navbar .nav-link {
+      color: #eee;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav.navbar .nav-link:hover,
+    nav.navbar .nav-link.active {
+      color: #4da6ff;
+    }
+
+    /* Botão flutuante do WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25d366;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 6px 15px rgb(37 211 102 / 0.5);
+      text-decoration: none;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transform-origin: center;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.15);
+      box-shadow: 0 8px 20px rgb(37 211 102 / 0.8);
+    }
+    .whatsapp-icon {
+      width: 36px;
+      height: 36px;
+    }
+    .whatsapp-text {
+      white-space: nowrap;
+      color: white;
+    }
+    @media (max-width: 576px) {
+      .whatsapp-text {
+        display: none;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      height: 90vh;
+      background: linear-gradient(rgba(29, 61, 105, 0.6), rgba(29, 61, 105, 0.6)), 
+                  url('https://coberturasdevidrocuritiba.com.br/wp-content/uploads/2018/12/serralheiro-cortando-metal.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f0f4ff;
+      text-align: center;
+      padding: 0 1rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+    .hero h1 span {
+      color: #4da6ff;
+    }
+    .hero p.lead {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .btn-primary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.8rem 2.5rem;
+      border-radius: 50px;
+      background: #4da6ff;
+      border: none;
+      box-shadow: 0 8px 15px rgb(77 166 255 / 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hero .btn-primary:hover {
+      background: #66b0ff;
+      box-shadow: 0 10px 20px rgb(102 176 255 / 0.6);
+    }
+
+    /* Seção Sobre */
+    #sobre {
+      padding: 5rem 0;
+      background: #fff;
+    }
+    #sobre h2 {
+      font-weight: 700;
+      font-size: 2.75rem;
+      margin-bottom: 1.5rem;
+      color: #1d3d69;
+    }
+    #sobre p.lead {
+      font-size: 1.15rem;
+      color: #555;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    #sobre img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px rgb(77 166 255 / 0.35);
+      transition: transform 0.3s ease;
+    }
+    #sobre img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Seção Serviços */
+    #servicos {
+      padding: 5rem 0;
+      background: #f4f9ff;
+    }
+    #servicos h2 {
+      font-weight: 700;
+      font-size: 2.75rem;
+      margin-bottom: 2.5rem;
+      color: #1d3d69;
+    }
+    .services .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgb(77 166 255 / 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .services .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 30px rgb(77 166 255 / 0.25);
+    }
+    .services img {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      height: 220px;
+      object-fit: cover;
+    }
+    .services .card-title {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #0d6efd;
+      text-transform: capitalize;
+    }
+    .services .card-text {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Seção Diferenciais */
+    #diferenciais {
+      background: #fff;
+      padding: 5rem 0;
+    }
+    #diferenciais h2 {
+      font-weight: 700;
+      font-size: 2.75rem;
+      margin-bottom: 3rem;
+      color: #1d3d69;
+    }
+    .differentials .col-md-4 {
+      text-align: center;
+      padding: 1rem 2rem;
+      transition: background-color 0.3s ease;
+      border-radius: 12px;
+    }
+    .differentials .col-md-4:hover {
+      background-color: #e7f0ff;
+      cursor: default;
+    }
+    .differentials i {
+      font-size: 3rem;
+      color: #4da6ff;
+      margin-bottom: 1rem;
+      transition: color 0.3s ease;
+    }
+    .differentials .col-md-4:hover i {
+      color: #1d3d69;
+    }
+    .differentials h5 {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #0d6efd;
+      text-transform: none;
+    }
+    .differentials p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Seção Contato */
+    #contato {
+      background: #f4f9ff;
+      padding: 4rem 0 6rem 0;
+      color: #333;
+    }
+    #contato h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #1d3d69;
+    }
+    #contato p {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+    #contato .btn-success {
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding: 0.8rem 3rem;
+      border-radius: 50px;
+      background: #25d366;
+      border: none;
+      box-shadow: 0 8px 18px rgb(37 211 102 / 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    #contato .btn-success:hover {
+      background: #22b95b;
+      box-shadow: 0 10px 25px rgb(34 185 91 / 0.7);
+    }
+    #contato strong {
+      color: #1d3d69;
+    }
+    #contato p + p {
+      margin-top: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a1a;
+      color: #ccc;
+      padding: 2rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    footer p {
+      margin: 0;
+      user-select: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Aço Fort</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="#diferenciais">Diferenciais</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="https://wa.me/551788351382?text=Oi,%20gostaria%20de%20fazer%20um%20orçamento!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg class="whatsapp-icon" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163a11.79 11.79 0 0 1-1.587-5.945C.157 5.26 5.42 0 12.073 0c3.21 0 6.22 1.24 8.48 3.497a11.822 11.822 0 0 1 3.49 8.414c-.003 6.65-5.42 12.065-12.084 12.065a11.88 11.88 0 0 1-6.545-1.85l-6.305 1.65zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.885-4.434 9.888-9.88.002-5.462-4.4-9.89-9.89-9.892-5.452 0-9.887 4.434-9.887 9.88 0 2.21.722 3.891 1.95 5.14l-.82 3.778 3.737-.964zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.148-1.758-.867-2.03-.967-.272-.099-.47-.148-.67.15-.198.297-.768.966-.94 1.164-.173.198-.347.223-.644.074-.297-.148-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.174.2-.298.3-.497.099-.198.05-.372-.025-.52-.074-.148-.67-1.611-.916-2.203-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.148.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+    <span class="whatsapp-text">Fale com a gente</span>
+  </a>
+
+  <!-- Hero -->
+  <section class="hero" id="home" role="banner" aria-label="Serralheria Aço Fort - Confiança e qualidade em aço">
+    <div>
+      <h1><span>Aço</span> Fort</h1>
+      <p class="lead">Serralheria com tradição e excelência em serviços de aço e metais.</p>
+      <a href="#contato" class="btn btn-primary" role="button" aria-label="Entre em contato">Entre em contato</a>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="text-center" tabindex="0" aria-labelledby="sobre-title">
+    <div class="container">
+      <h2 id="sobre-title">Quem Somos</h2>
+      <img src="/img/foto-acofort.jpg" alt="Foto de serralheiro cortando metal" />
+      <p class="lead mt-4">
+        A <strong>Serralheria Aço Fort</strong> é referência no mercado, com anos de experiência e compromisso com a qualidade, atendendo desde pequenos reparos até grandes projetos industriais.
+      </p>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" aria-labelledby="servicos-title" class="services">
+    <div class="container">
+      <h2 id="servicos-title" class="text-center mb-5">Nossos Serviços</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/img/image3.png" class="card-img-top" alt="Serviço de área gourmet" />
+            <div class="card-body">
+              <h5 class="card-title">Área gourmet</h5>
+              <p class="card-text">Projetos personalizados para áreas gourmet, combinando funcionalidade e estilo para seu espaço de lazer.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/img/image.png" class="card-img-top" alt="Serviço de garagens" />
+            <div class="card-body">
+              <h5 class="card-title">Garagens</h5>
+              <p class="card-text">Construção e reforço de garagens seguras e práticas, protegendo seus veículos com qualidade e durabilidade.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/img/image2.png" class="card-img-top" alt="Serviço de estruturas metálicas" />
+            <div class="card-body">
+              <h5 class="card-title">Estruturas Metálicas</h5>
+              <p class="card-text">Soluções em estruturas metálicas para obras industriais e comerciais, garantindo resistência e eficiência.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Diferenciais -->
+  <section id="diferenciais" aria-labelledby="diferenciais-title" class="differentials">
+    <div class="container">
+      <h2 id="diferenciais-title" class="text-center mb-5">Por que escolher a Aço Fort?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <i class="bi bi-award-fill" aria-hidden="true"></i>
+          <h5>Qualidade Garantida</h5>
+          <p>Materiais de primeira linha e acabamentos impecáveis.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="bi bi-clock-fill" aria-hidden="true"></i>
+          <h5>Entrega no Prazo</h5>
+          <p>Compromisso absoluto com os prazos estabelecidos.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="bi bi-people-fill" aria-hidden="true"></i>
+          <h5>Equipe Especializada</h5>
+          <p>Profissionais capacitados e dedicados para cada projeto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" tabindex="0" aria-labelledby="contato-title">
+    <div class="container text-center">
+      <h2 id="contato-title">Entre em Contato</h2>
+      <p>Estamos prontos para atender você. Solicite um orçamento sem compromisso!</p>
+      <a href="https://wa.me/551788351382?text=Oi,%20gostaria%20de%20fazer%20um%20orçamento!" target="_blank" rel="noopener" class="btn btn-success" role="button" aria-label="Fale conosco pelo WhatsApp">
+        <i class="bi bi-whatsapp me-2"></i>WhatsApp
+      </a>
+      <p class="mt-4"><strong>Telefone:</strong> (17) 8835-1382</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <p>&copy; 2025 Serralheria Aço Fort. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar background ao scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('nav.navbar');
+      if(window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>
